@@ -4,10 +4,11 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class HelloWorld extends Component
+class CreatePool extends Component
 {
+    public ?string $title;
     public function render()
     {
-        return view('livewire.hello-world', ['name' => 'Slider']);
+        return view('livewire.create-pool');
     }
 }

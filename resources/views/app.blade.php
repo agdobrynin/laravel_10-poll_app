@@ -10,8 +10,7 @@
         @livewireStyles
     </head>
     <body class="container mx-auto mt-10 mb-10 max-w-lg">
-        @livewire('hello-world')
-
         @livewireScripts
+        @livewire('create-pool')
     </body>
 </html>
