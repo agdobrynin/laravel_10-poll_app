@@ -21,6 +21,7 @@ class PollList extends Component
     public function vote(Option $option): void
     {
         $option->votes()->create();
+        $this->emitTo('vote-stat', VoteStat::VOTE_CALC);
     }
 
     public function render()
