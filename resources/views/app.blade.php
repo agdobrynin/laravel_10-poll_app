@@ -4,13 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Pool App</title>
+        <title>Poll App</title>
         @vite('resources/css/app.css')
 
         @livewireStyles
     </head>
-    <body class="container mx-auto mt-10 mb-10 max-w-lg">
+    <body class="container mx-auto mt-4 mb-10 max-w-lg">
+        <nav class="p-4 mb-4 bg-slate-100 rounded-md shadow-md gap-2 flex">
+            <a href="{{ route('polls.list') }}" class="btn">Poll list</a>
+            <a href="{{ route('polls.create') }}" class="btn">Create Poll</a>
+        </nav>
+        {{ $slot }}
         @livewireScripts
-        @livewire('create-pool')
     </body>
 </html>

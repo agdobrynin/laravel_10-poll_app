@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\CreatePoll;
+use App\Http\Livewire\PollList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +14,5 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('app');
-});
+Route::get('/', PollList::class)->name('polls.list');
+Route::get('/polls/create', CreatePoll::class)->name('polls.create');
