@@ -7,11 +7,11 @@ use Livewire\Component;
 
 class VoteStat extends Component
 {
-    public const VOTE_CALC = 'vote-calc';
+    public const LISTENER_VOTE_CALC = 'calc';
 
     public int $voteCount = 0;
 
-    protected $listeners = [self::VOTE_CALC => 'calc'];
+    protected $listeners = [self::LISTENER_VOTE_CALC];
 
     public function mount()
     {
