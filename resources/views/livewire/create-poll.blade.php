@@ -38,7 +38,7 @@
                 Add Poll
             </button>
             <div class="w-full flex" wire:loading>
-                <div class="w-40 mx-auto"><x-loader message="Sending data" /></div>
+                <div class="w-40 mx-auto"><x-ui.loader message="Sending data" /></div>
             </div>
         </div>
     </form>
