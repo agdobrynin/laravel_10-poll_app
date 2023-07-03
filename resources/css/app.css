@@ -15,3 +15,11 @@ textarea {
 .error {
     @apply text-red-500 text-sm
 }
+
+.vote-link {
+    @apply cursor-pointer underline underline-offset-1 decoration-indigo-400 hover:underline-offset-4 hover:decoration-indigo-600
+}
+
+.vote-option {
+    @apply flex gap-2 justify-between border p-2 bg-white rounded-md hover:shadow-md
+}

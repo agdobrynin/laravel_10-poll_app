@@ -40,7 +40,10 @@
             stroke-linejoin="round"
             stroke-width="24"></line>
     </svg>
+
+
     @isset($message)
-    <span class="text-xs font-medium text-gray-500">{{ $message }}</span>
+        <span class="text-xs font-medium text-gray-500">{{ $message }}</span>
     @endisset
+
 </div>
