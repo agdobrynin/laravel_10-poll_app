@@ -23,3 +23,7 @@ textarea {
 .vote-option {
     @apply flex gap-2 justify-between border p-2 bg-white rounded-md hover:shadow-md
 }
+
+input[disabled],button[disabled] {
+    @apply text-slate-400 bg-slate-200
+}

@@ -7,7 +7,7 @@
     @endif
 
     <div wire:loading wire:target="gotoPage,search">
-        <x-ui.loader message="Updating..." />
+        <x-ui.loader size="6" message="Updating..." />
     </div>
 
         @forelse ($polls as $poll)
@@ -28,7 +28,7 @@
                         {{ $option->name }}
                     </div>
                     <div wire:loading
-                         wire:target="vote"><x-ui.loader /></div>
+                         wire:target="vote"><x-ui.loader size="6" /></div>
                     <div>
                         {{ $option->votes->count() }}
                         {{ \Illuminate\Support\Str::plural('vote', $option->votes->count()) }}

@@ -1,8 +1,9 @@
 @props([
-    'message'
+    'message',
+    'size' => 3,
 ])
-<div aria-label="Loading..." role="status" class="flex items-center space-x-2">
-    <svg class="h-6 w-6 animate-spin stroke-gray-500" viewBox="0 0 256 256">
+<div aria-label="Loading..." class="flex items-center space-x-2">
+    <svg class="h-{{ $size  }} w-{{ $size }} animate-spin stroke-gray-500" viewBox="0 0 256 256">
         <line x1="128" y1="32" x2="128" y2="64" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
         <line
             x1="195.9"
