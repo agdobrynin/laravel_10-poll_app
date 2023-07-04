@@ -30,6 +30,7 @@ class CreatePoll extends Component
     {
         $this->validateOnly($propertyName);
     }
+
     public function addOption(): void
     {
         $this->options[] = '';

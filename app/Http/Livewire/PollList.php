@@ -27,7 +27,7 @@ class PollList extends Component
     public function render()
     {
         $polls = Poll::with('options.votes')
-            ->where('title', 'like', '%'.$this->search.'%')
+            ->where('title', 'like', '%' . $this->search . '%')
             ->latest()
             ->paginate(1);
 
