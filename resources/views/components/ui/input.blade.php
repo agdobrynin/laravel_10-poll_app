@@ -1,14 +1,13 @@
 @props([
     'model',
     'label' => null,
-    'id' => '',
     'placeholder' => '',
 ])
 @if($label)
-    <label @if($id) for="{{ $id }}" @endif>{{ $label }}</label>
+    <label for="{{ md5($label) }}" class="cursor-pointer">{{ $label }}</label>
 @endif
 <input type="text"
-       @if($id) id="{{ $id }}" @endif
+       @if($label) id="{{ md5($label) }}" @endif
        placeholder="{{ $placeholder }}"
        wire:model="{{ $model }}"
     {{ $attributes->thatStartWith('wire:') }}

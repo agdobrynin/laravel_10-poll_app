@@ -4,7 +4,6 @@
             <x-ui.input
                 label="Poll title"
                 model="title"
-                id="poll-title"
                 wire:loading.attr="disabled"
                 wire:target="createPoll"/>
         </div>
