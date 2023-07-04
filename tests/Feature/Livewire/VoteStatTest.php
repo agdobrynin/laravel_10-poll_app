@@ -22,6 +22,20 @@ class VoteStatTest extends TestCase
     }
 
     /** @test */
+    public function the_component_can_see_on_main_page(): void
+    {
+        $this->get('/')
+            ->assertSeeLivewire(VoteStat::class);
+    }
+
+    /** @test */
+    public function the_component_can_see_create_new_poll_page(): void
+    {
+        $this->get('/polls/create')
+            ->assertSeeLivewire(VoteStat::class);
+    }
+
+    /** @test */
     public function show_count_votes(): void
     {
         Poll::factory(2)
