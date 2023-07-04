@@ -1,7 +1,7 @@
 <div class="mt-4">
     @if ($polls)
         <div class="mb-4">
-            <label for="filter-input" class="cursor-pointer">Filter by poll title</label>
+            <label for="filter-input" class="cursor-pointer">Filter by poll title or question name</label>
             <input id= "filter-input" placeholder="Search string here" type="text" wire:model="search">
         </div>
     @endif

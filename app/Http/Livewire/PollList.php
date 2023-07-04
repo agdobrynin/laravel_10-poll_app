@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Option;
 use App\Models\Poll;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -26,12 +27,21 @@ class PollList extends Component
 
     public function render()
     {
-        $polls = Poll::with('options.votes')
-            ->where('title', 'like', '%' . $this->search . '%')
-            ->latest()
-            ->paginate(1);
+        $polls = Poll::when(
+                $this->search,
+                function (Builder $builder) {
+                    return $builder
+                        ->where('title', 'like', '%' . $this->search . '%')
+                        ->orWhereHas(
+                            'options',
+                            fn(Builder $query) => $query->where('name', 'like', '%' . $this->search . '%')
+                        );
+                }
+            )
+            ->with('options.votes')
+            ->latest();
 
-        return view('livewire.poll-list', ['polls' => $polls])
+        return view('livewire.poll-list', ['polls' => $polls->paginate(1)])
             ->layout('app');
     }
 }
