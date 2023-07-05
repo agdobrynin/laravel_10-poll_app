@@ -120,4 +120,22 @@ class PollListTest extends TestCase
 
         $this->assertEquals(4, $votes);
     }
+
+    /** @test  */
+    public function navigation_previous_next_pages(): void
+    {
+        Poll::factory(2)
+            ->has(Option::factory(2))
+            ->create();
+
+        Livewire::test(PollList::class)
+            ->call('nextPage', 'page')
+            ->assertOk()
+            ->assertSee(Poll::all()->values()->offsetGet(1)->title)
+            ->assertDontSee(Poll::all()->values()->offsetGet(0)->title)
+            ->call('previousPage', 'page')
+            ->assertOk()
+            ->assertSee(Poll::all()->values()->offsetGet(0)->title)
+            ->assertDontSee(Poll::all()->values()->offsetGet(1)->title);
+    }
 }

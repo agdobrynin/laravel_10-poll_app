@@ -11,14 +11,14 @@
         </div>
     @endif
 
-    <div wire:loading wire:target="gotoPage,search">
+    <div wire:loading wire:target="gotoPage,search,nextPage,previousPage">
         <x-ui.loader size="6" message="Updating..." />
     </div>
 
     @forelse ($polls as $poll)
         <div wire:key="poll-{{ $poll->id }}"
              wire:loading.remove
-             wire:target="gotoPage,search"
+             wire:target="gotoPage,search,nextPage,previousPage"
              class="mb-4 bg-slate-100 rounded-md px-6 py-2">
             <h3 class="mb-4 text-xl">
                 Poll: &laquo;{{ $poll->title }}&raquo;
