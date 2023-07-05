@@ -1,7 +1,11 @@
 <div class="mt-4">
     @inject('flashMessage', '\App\Services\FlashMessageSuccess')
-    @if ($msg = $flashMessage->get())
-        <x-ui.alert message="{{$msg}}"/>
+    @if ($msg = $flashMessage->getSuccess())
+        <x-ui.alert message="{{$msg}}" class="alert-success"/>
+    @endif
+
+    @if ($msg = $flashMessage->getDanger())
+        <x-ui.alert message="{{$msg}}" class="alert-danger"/>
     @endif
 
     @if ($polls)

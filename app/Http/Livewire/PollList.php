@@ -24,7 +24,7 @@ class PollList extends Component
     {
         $option->votes()->create();
         $this->emit(VoteStat::LISTENER_VOTE_CALC);
-        $flashMessageSuccess->add('Your vote has been accepted');
+        $flashMessageSuccess->addSuccess('Your vote has been accepted');
     }
 
     public function render()

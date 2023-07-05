@@ -28,6 +28,14 @@ input[disabled],button[disabled] {
     @apply text-slate-400 bg-slate-200
 }
 
+.alert {
+    @apply border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium hover:bg-gray-50 focus:outline-none sm:flex-1 shadow-sm text-gray-600 bg-gray-100
+}
+
 .alert-success {
-    @apply border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium hover:bg-green-50 focus:outline-none sm:flex-1 shadow-sm text-green-600 cursor-pointer bg-green-100
+    @apply alert hover:!bg-green-50 !text-green-600 !bg-green-100 border-green-400
+}
+
+.alert-danger {
+    @apply alert hover:!bg-red-50 !text-red-600 !bg-red-100 border-red-400
 }

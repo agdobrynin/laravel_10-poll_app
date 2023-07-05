@@ -42,7 +42,7 @@ class CreatePoll extends Component
     {
         unset($this->options[$index]);
         $this->options = array_values($this->options);
-        $flashMessageSuccess->add('The option was deleted from the poll.');
+        $flashMessageSuccess->addSuccess('The option was deleted from the poll.');
     }
 
     public function createPoll(FlashMessageSuccess $flashMessageSuccess)
@@ -55,7 +55,7 @@ class CreatePoll extends Component
                 array_map(fn(string $name) => ['name' => $name], $this->options)
             );
 
-        $flashMessageSuccess->add('The ' . $this->title . ' was created');
+        $flashMessageSuccess->addSuccess('The ' . $this->title . ' was created');
 
         $this->reset(['title', 'options']);
     }
