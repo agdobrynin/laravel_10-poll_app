@@ -27,3 +27,7 @@ textarea {
 input[disabled],button[disabled] {
     @apply text-slate-400 bg-slate-200
 }
+
+.alert-success {
+    @apply border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium hover:bg-green-50 focus:outline-none sm:flex-1 shadow-sm text-green-600 cursor-pointer bg-green-100
+}

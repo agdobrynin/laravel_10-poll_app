@@ -1,4 +1,9 @@
 <div>
+    @inject('flashMessage', '\App\Services\FlashMessageSuccess')
+    @if ($msg = $flashMessage->get())
+        <x-ui.alert message="{{$msg}}"/>
+    @endif
+
     <form wire:submit.prevent="createPoll">
         <div class="mb-4">
             <x-ui.input

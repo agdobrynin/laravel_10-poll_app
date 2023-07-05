@@ -1,8 +1,13 @@
 <div class="mt-4">
+    @inject('flashMessage', '\App\Services\FlashMessageSuccess')
+    @if ($msg = $flashMessage->get())
+        <x-ui.alert message="{{$msg}}"/>
+    @endif
+
     @if ($polls)
         <div class="mb-4">
             <label for="filter-input" class="cursor-pointer">Filter by poll title or question name</label>
-            <input id= "filter-input" placeholder="Search string here" type="text" wire:model="search">
+            <input id="filter-input" placeholder="Search string here" type="text" wire:model="search">
         </div>
     @endif
 
@@ -10,7 +15,7 @@
         <x-ui.loader size="6" message="Updating..." />
     </div>
 
-        @forelse ($polls as $poll)
+    @forelse ($polls as $poll)
         <div wire:key="poll-{{ $poll->id }}"
              wire:loading.remove
              wire:target="gotoPage,search"

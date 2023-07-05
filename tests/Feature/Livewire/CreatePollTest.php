@@ -112,7 +112,9 @@ class CreatePollTest extends TestCase
             ->set('options.1', 'Dfj')
             ->assertHasNoErrors(['title'])
             ->call('createPoll')
-            ->assertRedirect('/');
+            ->assertStatus(200)
+            ->assertSet('title', '')
+            ->assertSet('options', []);
 
         $poll = Poll::whereTitle('My first poll for alphabet');
         $this->assertTrue($poll->exists());

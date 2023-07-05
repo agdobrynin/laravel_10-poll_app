@@ -1,9 +1,9 @@
 @props([
-    'message',
+    'message' => null,
     'size' => 3,
 ])
 <div aria-label="Loading..." class="flex items-center space-x-2">
-    <svg class="h-{{ $size  }} w-{{ $size }} animate-spin stroke-gray-500" viewBox="0 0 256 256">
+    <svg class="h-{{$size}} w-{{$size}} animate-spin stroke-gray-500" viewBox="0 0 256 256">
         <line x1="128" y1="32" x2="128" y2="64" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
         <line
             x1="195.9"
@@ -42,9 +42,7 @@
             stroke-width="24"></line>
     </svg>
 
-
     @isset($message)
         <span class="text-xs font-medium text-gray-500">{{ $message }}</span>
     @endisset
-
 </div>

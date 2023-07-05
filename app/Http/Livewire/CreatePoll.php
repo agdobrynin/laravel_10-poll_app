@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Poll;
+use App\Services\FlashMessageSuccess;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class CreatePoll extends Component
 {
+    private const FLASH_SUCCESS_MESSAGE_KEY = 'success_message';
     /**
      * @var string
      */
@@ -36,13 +38,14 @@ class CreatePoll extends Component
         $this->options[] = '';
     }
 
-    public function removeOption(int $index): void
+    public function removeOption(int $index, FlashMessageSuccess $flashMessageSuccess): void
     {
         unset($this->options[$index]);
         $this->options = array_values($this->options);
+        $flashMessageSuccess->add('The option was deleted from the poll.');
     }
 
-    public function createPoll()
+    public function createPoll(FlashMessageSuccess $flashMessageSuccess)
     {
         $this->validate();
 
@@ -52,9 +55,9 @@ class CreatePoll extends Component
                 array_map(fn(string $name) => ['name' => $name], $this->options)
             );
 
-        $this->reset(['title', 'options']);
+        $flashMessageSuccess->add('The ' . $this->title . ' was created');
 
-        return redirect()->to('/');
+        $this->reset(['title', 'options']);
     }
 
     public function render()
