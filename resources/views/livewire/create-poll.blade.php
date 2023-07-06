@@ -1,3 +1,4 @@
+@section('pageTitle', 'New Poll')
 <div>
     @inject('flashMessage', '\App\Services\FlashMessage')
     @if ($msg = $flashMessage->getSuccess())
