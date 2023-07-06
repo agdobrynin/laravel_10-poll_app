@@ -40,7 +40,7 @@ class PollList extends Component
             $this->emit(VoteStat::LISTENER_VOTE_CALC);
             $flashMessageSuccess->addSuccess('Your vote has been accepted');
         } catch (RateLimiterTooManyRequestException $exception) {
-            $flashMessageSuccess->addDanger($exception->error);
+            $flashMessageSuccess->addDanger($exception->getMessage());
         }
     }
 

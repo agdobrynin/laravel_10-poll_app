@@ -4,12 +4,10 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use Illuminate\Support\Str;
-use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
+use RuntimeException;
 
-class RateLimiterTooManyRequestException extends TooManyRequestsHttpException
+class RateLimiterTooManyRequestException extends RuntimeException
 {
-    public readonly string $error;
-
     public function __construct(
         readonly public ?int $retryAfter = null,
     )
@@ -22,7 +20,8 @@ class RateLimiterTooManyRequestException extends TooManyRequestsHttpException
             ? Str::plural('minute', $retryAfterValue)
             : Str::plural('second', $retryAfterValue);
 
-        $this->error = 'Too many request.' . ($this->retryAfter ? sprintf(' Retry after %d %s.', $retryAfterValue, $retryAfterTitle) : '');
-        parent::__construct($retryAfter);
+        $message = 'Too many request.' . ($this->retryAfter ? sprintf(' Retry after %d %s.', $retryAfterValue, $retryAfterTitle) : '');
+
+        parent::__construct($message);
     }
 }
