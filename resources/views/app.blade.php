@@ -17,7 +17,10 @@
             </div>
             @livewire('vote-stat')
         </nav>
-        {{ $slot }}
+        <div class="mx-4 mb-4">
+            {{ $slot }}
+        </div>
+
         @livewireScripts
     </body>
 </html>
