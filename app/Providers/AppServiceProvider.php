@@ -24,12 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             RateLimiterInterface::class,
-            function (Application $application) {
-                return new RateLimiter(
-                    $application->make(\Illuminate\Cache\RateLimiter::class),
-                    $application->make(\Illuminate\Http\Request::class)
-                );
-            }
+            fn(Application $app) => $app->make(RateLimiter::class)
         );
     }
 }
