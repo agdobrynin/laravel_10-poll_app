@@ -15,7 +15,7 @@ cобытия (*events*) и обмен данными между компоне�
 ---
 Стек:
 - 🐘 Php 8.2 + Laravel 10 + Livewire 2.
-- 🦖 MariaDb
+- 🌊 SQLite 3.
 - 🐳 Docker (Docker compose) + Laravel Sail
 - ⛑ Тестирование компонентов Livewire.
 
