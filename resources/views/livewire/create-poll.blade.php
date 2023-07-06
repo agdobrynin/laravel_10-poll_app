@@ -39,6 +39,7 @@
                         <x-ui.button
                             text="Remove"
                             class="btn"
+                            wire:key="option-btn-{{ $index }}"
                             wire:loading.attr="disabled"
                             wire:target="createPoll,removeOption"
                             wire:click.prevent="removeOption({{ $index }})"
