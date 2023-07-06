@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Poll;
-use App\Services\FlashMessageSuccess;
+use App\Services\FlashMessage;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
@@ -38,14 +38,14 @@ class CreatePoll extends Component
         $this->options[] = '';
     }
 
-    public function removeOption(int $index, FlashMessageSuccess $flashMessageSuccess): void
+    public function removeOption(int $index, FlashMessage $flashMessageSuccess): void
     {
         unset($this->options[$index]);
         $this->options = array_values($this->options);
         $flashMessageSuccess->addSuccess('The option was deleted from the poll.');
     }
 
-    public function createPoll(FlashMessageSuccess $flashMessageSuccess)
+    public function createPoll(FlashMessage $flashMessageSuccess)
     {
         $this->validate();
 

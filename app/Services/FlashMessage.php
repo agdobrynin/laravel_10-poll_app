@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-class FlashMessageSuccess
+class FlashMessage
 {
     public const FLASH_SUCCESS_MESSAGE_KEY = 'success_message';
     public const FLASH_DANGER_MESSAGE_KEY = 'danger_message';

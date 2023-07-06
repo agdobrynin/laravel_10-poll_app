@@ -8,6 +8,7 @@ use App\Models\Poll;
 use App\Models\Vote;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Config;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -105,6 +106,9 @@ class PollListTest extends TestCase
         /** @var Collection<Option> $pollOptions */
         $pollOptions = $poll->options;
 
+        /** config rate limit for vote action */
+        Config::set('poll_app.limit.vote.max_attempts', 0);
+
         Livewire::test(PollList::class)
             ->call('vote', $pollOptions->values()->get(0))
             ->assertEmitted('calc')
@@ -113,12 +117,44 @@ class PollListTest extends TestCase
             ->call('vote', $pollOptions->values()->get(1))
             ->assertEmitted('calc')
             ->call('vote', $pollOptions->values()->get(5))
-            ->assertEmitted('calc');
+            ->assertEmitted('calc')
+            ->assertSee('Your vote has been accepted');
 
         $votes = $poll->hasManyThrough(Vote::class, Option::class)
             ->count();
 
         $this->assertEquals(4, $votes);
+    }
+
+    /** @test  */
+    public function vote_rate_limit(): void
+    {
+        /** @var Poll $poll */
+        $poll = Poll::factory()->has(Option::factory())->create();
+
+        /** @var Option $option */
+        $option = $poll->options->first();
+
+        /** config rate limit for vote action */
+        Config::set('poll_app.limit.vote.max_attempts', 1);
+
+        Livewire::test(PollList::class)
+            ->call('vote', $option->id)
+            ->assertEmitted('calc')
+            ->assertSee('Your vote has been accepted')
+            ->call('vote',  $option->id)
+            ->assertNotEmitted('calc')
+            ->assertSee('Too many request. Retry after')
+            ->call('vote',  $option->id)
+            ->assertNotEmitted('calc')
+            ->assertSee('Too many request. Retry after')
+            ->call('vote',  $option->id)
+            ->assertNotEmitted('calc')
+            ->assertSee('Too many request. Retry after');
+
+        $votes = $poll->hasManyThrough(Vote::class, Option::class)
+            ->count();
+        $this->assertEquals(1, $votes);
     }
 
     /** @test  */

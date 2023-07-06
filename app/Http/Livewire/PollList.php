@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Contracts\RateLimiterInterface;
+use App\Exceptions\RateLimiterTooManyRequestException;
 use App\Models\Option;
 use App\Models\Poll;
-use App\Services\FlashMessageSuccess;
+use App\Services\FlashMessage;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -20,11 +22,26 @@ class PollList extends Component
         $this->resetPage();
     }
 
-    public function vote(Option $option, FlashMessageSuccess $flashMessageSuccess): void
+    public function vote(
+        Option               $option,
+        FlashMessage         $flashMessageSuccess,
+        RateLimiterInterface $rateLimiter,
+    ): void
     {
-        $option->votes()->create();
-        $this->emit(VoteStat::LISTENER_VOTE_CALC);
-        $flashMessageSuccess->addSuccess('Your vote has been accepted');
+        try {
+            if ($maxAttempts = config('poll_app.limit.vote.max_attempts')) {
+                $key = 'limit-poll-' . $option->poll_id;
+                $decaySecond = config('poll_app.limit.vote.decay_seconds');
+
+                $rateLimiter->limit($maxAttempts, $decaySecond, $key);
+            }
+
+            $option->votes()->create();
+            $this->emit(VoteStat::LISTENER_VOTE_CALC);
+            $flashMessageSuccess->addSuccess('Your vote has been accepted');
+        } catch (RateLimiterTooManyRequestException $exception) {
+            $flashMessageSuccess->addDanger($exception->error);
+        }
     }
 
     public function render()

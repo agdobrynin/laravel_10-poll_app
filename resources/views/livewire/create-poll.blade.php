@@ -1,5 +1,5 @@
 <div>
-    @inject('flashMessage', '\App\Services\FlashMessageSuccess')
+    @inject('flashMessage', '\App\Services\FlashMessage')
     @if ($msg = $flashMessage->getSuccess())
         <x-ui.alert message="{{$msg}}" class="alert-success"/>
     @endif
